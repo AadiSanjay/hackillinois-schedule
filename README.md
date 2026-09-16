@@ -1,75 +1,66 @@
-# React + TypeScript + Vite
+# HackIllinois Ocean Schedule
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An ocean-themed event schedule built for the HackIllinois 2027 Systems Coding Challenge.
 
-Currently, two official plugins are available:
+The application uses the public HackIllinois event API to display hackathon events and adds tools for searching, filtering, planning, and saving a personal schedule.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+[Add deployed link here]
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Live event data from the HackIllinois API
+- Dynamic Friday / Saturday / Sunday navigation
+- Chronologically sorted events
+- Search across event names, descriptions, sponsors, and locations
+- Event-type filtering
+- "Happening Now" and "Up Next" event highlighting
+- Event detail modal
+- Venue maps when provided by the HackIllinois API
+- Personal "My Schedule" system
+- Favorites persisted with `localStorage`
+- Schedule conflict detection for overlapping saved events
+- Event countdown/status information
+- Add individual events to a calendar using `.ics` files
+- Share event information using the Web Share API with clipboard fallback
+- Loading, error, and empty states
+- Responsive mobile layout
+- Ocean-inspired visual design and animations
+- Reduced-motion support for accessibility
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React
+- TypeScript
+- Vite
+- CSS
+- HackIllinois Adonix API
+- Browser APIs including:
+  - `localStorage`
+  - Web Share API
+  - Clipboard API
+  - Blob / Object URLs for calendar exports
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## How It Works
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The application fetches HackIllinois events when the React application first loads.
 
-```
+The main data flow is:
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```text
+HackIllinois API
+      ↓
+events state
+      ↓
+chronological sorting
+      ↓
+selected day
+      ↓
+event-type filtering
+      ↓
+search filtering
+      ↓
+My Schedule filtering
+      ↓
+rendered event cards
