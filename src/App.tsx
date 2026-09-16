@@ -33,8 +33,10 @@ function App() {
     async function fetchEvents() {
       try {
         const response = await fetch(
-          "https://adonix.hackillinois.org/event/"
-        );
+        import.meta.env.DEV
+    ? "https://adonix.hackillinois.org/event/"
+    : "/api/events"
+);
 
         if (!response.ok) {
           throw new Error("Failed to fetch events");
